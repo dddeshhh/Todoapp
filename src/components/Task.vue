@@ -2,7 +2,7 @@
   <div v-if="!isEditable" class="task-view">
     <input type="checkbox" v-model="task.completed"/>
     <label :class="{completed: task.completed}" @dblclick="editTask">{{task.title}}</label>
-    <button>X</button>
+    <button @click="remove(index)">X</button>
   </div>
   <input v-else=""
   v-model="newTitle"
@@ -17,9 +17,9 @@ export default {
   props: ['task', 'index'],
   data: function () {
   return {
-    isEditable: false,
-    newTitle: '',
-  }
+      isEditable: false,
+      newTitle: '',
+    }
   },
   methods: {
     editTask() {
@@ -36,6 +36,9 @@ export default {
     complete(e) {
       let completed = e.target.checked;
       this.task.completed = completed;
+    },
+    remove(index) {
+      this.$emit('remove-task', index)
     }
   }
 }

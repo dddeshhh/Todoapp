@@ -1,7 +1,7 @@
 <template lang="html">
     <ul class="task-list">
       <li v-for="(task, index) in tasks" :key="index">
-        <Task :task="task" :index="index"></Task>
+        <Task :task="task" :index="index" @remove-task="removeTask"></Task>
       </li>
     </ul>
 </template>
@@ -14,6 +14,11 @@ export default {
   props: ['tasks'],
   components: {
     Task
+  },
+  methods: {
+    removeTask(index) {
+      this.tasks.splice(index, 1);
+    }
   }
 }
 </script>
