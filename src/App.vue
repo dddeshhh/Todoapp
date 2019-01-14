@@ -2,11 +2,13 @@
   <div id="app">
     <header>Todo</header>
     <AddTask @add-task="addTask"></AddTask>
+    <TaskList :tasks="tasks"></TaskList>
   </div>
 </template>
 
 <script>
 import AddTask from './components/AddTask.vue'
+import TaskList from './components/TaskList.vue';
 
 export default {
   name: 'App',
@@ -16,7 +18,8 @@ export default {
     }
   },
   components: {
-    AddTask
+    AddTask,
+    TaskList
   },
   methods: {
     addTask (title) {
