@@ -1,7 +1,7 @@
 <template>
   <div v-if="!isEditable" class="task-view">
-    <input type="checkbox"/>
-    <label @dblclick="editTask">{{task.title}}</label>
+    <input type="checkbox" v-model="task.completed"/>
+    <label :class="{completed: task.completed}" @dblclick="editTask">{{task.title}}</label>
     <button>X</button>
   </div>
   <input v-else=""
@@ -32,6 +32,10 @@ export default {
     },
     editCancel() {
       this.isEditable = false;
+    },
+    complete(e) {
+      let completed = e.target.checked;
+      this.task.completed = completed;
     }
   }
 }
