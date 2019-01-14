@@ -2,29 +2,57 @@
   <div id="app">
     <header>Todo</header>
     <AddTask @add-task="addTask"></AddTask>
-    <TaskList :tasks="tasks"></TaskList>
+    <TaskList :tasks="filteredTasks"></TaskList>
+    <Filters :selected-filter="filter" @select-filter="selectFlter"></Filters>
   </div>
 </template>
 
 <script>
 import AddTask from './components/AddTask.vue'
-import TaskList from './components/TaskList.vue';
+import TaskList from './components/TaskList.vue'
+import Filters from './components/Filters.vue'
+
+let filters = {
+  all: function (tasks) {
+    return tasks;
+  },
+  active: function (tasks) {
+    return tasks.filter((task) => {
+      return !task.completed;
+    })
+  },
+  completed: function (tasks) {
+    return tasks.filter((task) => {
+      return task.completed;
+    })
+  }
+}
 
 export default {
   name: 'App',
   data: function () {
     return {
-      tasks: []
+      tasks: [],
+      filter: 'all'
     }
   },
   components: {
     AddTask,
-    TaskList
+    TaskList,
+    Filters
   },
   methods: {
     addTask (title) {
       this.tasks.push({title: title, completed: false});
+    },
+    selectFlter(filter) {
+      this.filter = filter;
     }
+  },
+  computed: {
+    filteredTasks() {
+      return filters[this.filter](this.tasks);
+    },
   },
 }
 </script>
