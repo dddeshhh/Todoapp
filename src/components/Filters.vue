@@ -34,10 +34,14 @@ export default {
 </script>
 
 <style lang="css">
+  .filters {
+    margin-top: 20px;
+  }
   .filters span {
     margin: 2px;
     padding: 5px;
     border: 1px solid;
     border-radius: 5px;
+    cursor: pointer;
   }
 </style>

@@ -1,5 +1,5 @@
 <template lang="html">
-    <ul class="task-list">
+    <ul class="task-list" v-if="tasks.length">
       <li v-for="(task, index) in tasks" :key="index">
         <Task :task="task" :index="index" @remove-task="removeTask"></Task>
       </li>
