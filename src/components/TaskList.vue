@@ -1,21 +1,24 @@
-<template>
+<template lang="html">
     <ul class="task-list">
       <li v-for="(task, index) in tasks" :key="index">
-        {{task.title}}
+        <Task :task="task" :index="index"></Task>
       </li>
     </ul>
 </template>
 
 <script>
+import Task from './Task.vue';
 
 export default {
   name: 'TaskList',
   props: ['tasks'],
-  components: {}
+  components: {
+    Task
+  }
 }
 </script>
 
-<style>
+<style lang="css">
 .task-list {
   margin-left: 0;
   padding: 10px 5px 5px 10px;
