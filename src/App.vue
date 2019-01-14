@@ -32,7 +32,7 @@ export default {
   name: 'App',
   data: function () {
     return {
-      tasks: [],
+      tasks: JSON.parse(localStorage.getItem('tasks') || '[]'),
       filter: 'all'
     }
   },
@@ -54,6 +54,14 @@ export default {
       return filters[this.filter](this.tasks);
     },
   },
+  watch: {
+    tasks: {
+      handler: function (tasks) {
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+      },
+      deep: true
+    }
+  }
 }
 </script>
 
