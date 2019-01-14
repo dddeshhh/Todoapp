@@ -15,7 +15,10 @@ export default {
   },
   methods: {
     addTask () {
-      this.$emit('add-task', this.title);
+      this.title = this.title.trim();
+      if (this.title) {
+        this.$emit('add-task', this.title);
+      }
       this.title = '';
     }
   }

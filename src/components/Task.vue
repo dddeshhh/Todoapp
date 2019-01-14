@@ -16,10 +16,10 @@ export default {
   name: 'Task',
   props: ['task', 'index'],
   data: function () {
-  return {
-      isEditable: false,
-      newTitle: '',
-    }
+    return {
+        isEditable: false,
+        newTitle: '',
+      }
   },
   methods: {
     editTask() {
@@ -28,7 +28,12 @@ export default {
     },
     editDone() {
       this.isEditable = false;
-      this.task.title = this.newTitle;
+      this.newTitle = this.newTitle.trim();
+      if (!this.newTitle) {
+        this.remove(this.index);
+      } else {
+        this.task.title = this.newTitle;
+      }
     },
     editCancel() {
       this.isEditable = false;
