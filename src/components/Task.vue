@@ -1,15 +1,39 @@
 <template>
-  <div class="task-view">
+  <div v-if="!isEditable" class="task-view">
     <input type="checkbox"/>
-    <label>{{task.title}}</label>
+    <label @dblclick="editTask">{{task.title}}</label>
     <button>X</button>
   </div>
+  <input v-else=""
+  v-model="newTitle"
+  class="edit-input"
+  @keyup.enter="editDone"
+  @keyup.esc="editCancel">
 </template>
 
 <script>
 export default {
   name: 'Task',
   props: ['task', 'index'],
+  data: function () {
+  return {
+    isEditable: false,
+    newTitle: '',
+  }
+  },
+  methods: {
+    editTask() {
+      this.isEditable = true;
+      this.newTitle = this.task.title;
+    },
+    editDone() {
+      this.isEditable = false;
+      this.task.title = this.newTitle;
+    },
+    editCancel() {
+      this.isEditable = false;
+    }
+  }
 }
 </script>
 
@@ -37,6 +61,10 @@ export default {
 }
 .task-view label {
   word-break: break-all;
+}
+.edit-input {
+  height: 2em;
+  width: 100%;
 }
 
 </style>
